@@ -1,25 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginImage from '../../assets/login.jpg';
 import { useState } from "react";
 import { empty } from "../../utils/empty";
+import axiosInstance from "../../API";
+
 
 function Login() {
 
-    const [email, setEmail] = useState('');
+    const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        if(empty(email) || empty(password)) {
+        if(empty(username) || empty(password)) {
             setError("Fields cannot be empty!");
             return
         }
+     setError(null);
+     setSuccess(null);
 
-        setError(null);
-        //API call for authentication.
+    try {
+        const response = await axiosInstance.post('/login/', {
+            username,
+            password
+        });
+        setSuccess('Login successful!');
+        navigate('/account');
+    } catch (err) {
+    setError(err.response?.data?.detail || 'An error occured during Login check your details');
     }
+}
 
     return (
         <>
@@ -39,13 +54,13 @@ function Login() {
                         <form action="" method="" className="space-y-4">
                             <div>
                                 <input 
-                                    type="email" 
-                                    name="LoginEmail" 
-                                    placeholder="Email address..." 
+                                    type="username" 
+                                    name="Loginusername" 
+                                    placeholder="username" 
                                     className="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
                                     required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)} 
+                                    value={username}
+                                    onChange={(e) => setusername(e.target.value)} 
                                 />
                             </div>
                             <div>
