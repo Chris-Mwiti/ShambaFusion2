@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SignupImage from '../../assets/signup.jpg';
 import { empty } from "../../utils/empty";
@@ -16,6 +16,7 @@ function Signup() {
     const [isBuyer, setIsBuyer] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -42,6 +43,7 @@ function Signup() {
                 is_buyer: isBuyer
             });
             setSuccess('Signup successful!');
+            navigate('/login')
         } catch (err) {
             setError(err.response?.data?.detail || 'An error occurred during signup');
         }
