@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import './App.css';
 
@@ -11,7 +11,6 @@ import Market from './pages/marketplace/Market';
 import Contact from './pages/contact/Contact';
 
 function App() {
-
 
   return (
     <>
@@ -40,5 +39,4 @@ function App() {
     </>
   )
 }
-
-export default App
+export default App;
