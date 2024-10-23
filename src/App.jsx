@@ -6,9 +6,10 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Home from './pages/home/Home';
 import About from './pages/about/About';
-import Dashboard from './pages/account/Dashboard';
+import Admin from './pages/account/Admin';
 import Market from './pages/marketplace/Market';
 import Contact from './pages/contact/Contact';
+import { RoleProvider } from './hooks/useRole';
 
 function App() {
 
@@ -26,13 +27,14 @@ function App() {
 
               <Route path='/about' element={<About />} />
 
-              <Route path='/account' element={<Dashboard />} />
-
+              <Route path='/admin-panel/*' element={<RoleProvider><Admin /></RoleProvider>} />
+              
               <Route path='/contact' element={<Contact />} />
 
               <Route path='/market' element={<Market />} />
 
-              
+              {/* <Route path='/role' element={<Role />} /> */}
+
             </Routes>
           </div>
       </Router>
